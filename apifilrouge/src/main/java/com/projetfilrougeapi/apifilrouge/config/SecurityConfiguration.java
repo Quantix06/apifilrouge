@@ -39,7 +39,7 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
-    @Value("${springdoc.swagger-ui.enabled:true}")
+    @Value("${springdoc.swagger-ui.enabled:false}")
     private boolean swaggerEnabled;
     /**
      * Liste des URL accessibles sans authentification.
