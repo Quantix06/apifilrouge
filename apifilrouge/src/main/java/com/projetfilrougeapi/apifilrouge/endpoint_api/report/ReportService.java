@@ -34,8 +34,6 @@ public class ReportService {
         User reportedUser = userRepository.findById(report.getReportedUserId())
                 .orElseThrow(() -> new RuntimeException("Reported user not found with id: " + report.getReportedUserId()));
 
-        reportManagerService.banOrNot(reportedUser);
-
         Report newReport = Report.builder()
                 .reportType(ReportType.valueOf(report.getReportType()))
                 .description(report.getDescription())

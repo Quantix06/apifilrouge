@@ -2,192 +2,92 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenue sur Veevent - ${prenom} ${nom}</title>
+    <title>Bienvenue sur Veevent</title>
     <style>
         body {
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 40px 20px;
             background-color: #f5f7fa;
+            margin: 0;
+            padding: 40px 0;
         }
 
         .container {
-            background-color: #ffffff;
-            padding: 35px;
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .logo-section {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             text-align: center;
-            margin-bottom: 25px;
         }
 
         .logo {
-            max-width: 180px;
-            height: auto;
+            max-width: 150px;
+            margin-bottom: 20px;
         }
 
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #2980b9;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .welcome-title {
+        h1 {
             color: #2980b9;
-            font-size: 28px;
-            margin-bottom: 5px;
+            font-size: 26px;
+            margin-bottom: 10px;
         }
 
-        .welcome-subtitle {
-            color: #7f8c8d;
-            font-size: 18px;
-            margin: 0;
-            font-weight: normal;
-        }
-
-        .celebration-section {
-            background-color: #f0f9f4;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 25px 0;
-            border-left: 4px solid #27ae60;
-            text-align: center;
-        }
-
-        .celebration-section h3 {
-            color: #27ae60;
-            margin: 15px 0 10px;
-            font-size: 18px;
-        }
-
-        .celebration-section p {
-            margin: 0;
+        p {
+            color: #555;
+            line-height: 1.6;
             font-size: 16px;
-        }
-
-        .welcome-text {
-            font-size: 16px;
-            margin-bottom: 25px;
-        }
-
-        .personal-info {
-            background-color: #f0f7fb;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-            border-left: 4px solid #2980b9;
-        }
-
-        .personal-info h3 {
-            color: #2980b9;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .personal-info p {
-            margin: 8px 0;
-            font-size: 15px;
-        }
-
-        .welcome-features {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #5dade2;
-            margin: 25px 0;
-            font-size: 15px;
-        }
-
-        .welcome-features h3 {
-            color: #2980b9;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 18px;
         }
 
         .highlight {
-            background-color: #eaf4fd;
-            padding: 18px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f0f7fb;
+            border-left: 4px solid #2980b9;
             border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin: 25px 0;
-            text-align: center;
-            font-size: 15px;
-            font-weight: 500;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 28px;
+            background: #2980b9;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
         }
 
         .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            font-size: 14px;
+            margin-top: 40px;
+            font-size: 13px;
             color: #7f8c8d;
-            text-align: center;
+            line-height: 1.5;
         }
 
-        .signature {
-            margin-top: 15px;
-            font-weight: bold;
+        .footer strong {
+            display: block;
+            margin-bottom: 8px;
             color: #2980b9;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="logo-section">
-        <img src="https://veevent.vercel.app/veevent.png" alt="Logo Veevent" class="logo">
-    </div>
-
-    <div class="header">
-        <h1 class="welcome-title">🎉 Bienvenue sur Veevent ! 🎉</h1>
-        <h2 class="welcome-subtitle">Félicitations ${prenom} !</h2>
-    </div>
-
-    <div class="celebration-section">
-        <div style="font-size: 24px;">🥳 🎊 ✨</div>
-        <h3>Votre compte a été créé avec succès !</h3>
-        <p>Prêt(e) à vivre des expériences inoubliables ?</p>
-    </div>
-
-    <div class="welcome-text">
-        <p>Salut ${prenom} 👋,</p>
-        <p>Nous sommes <strong>ravis</strong> de t'accueillir dans la grande famille <strong>VeEvent</strong> 🌟.</p>
-        <p>Ton aventure commence maintenant et nous avons hâte de découvrir les événements auxquels tu vas participer ou que tu vas organiser 🚀.</p>
-    </div>
-
-    <div class="personal-info">
-        <h3>Récapitulatif de ton compte</h3>
-        <p><strong>Nom :</strong> ${nom}</p>
-        <p><strong>Prénom :</strong> ${prenom}</p>
-        <p><strong>Email :</strong> ${email}</p>
-        <p><strong>Pseudo :</strong> ${pseudo}</p>
-    </div>
-
-    <div class="welcome-features">
-        <h3>Ce qui t'attend</h3>
-        <p><strong>Découvrir</strong> des événements passionnants près de chez toi</p>
-        <p><strong>Créer</strong> tes propres événements et rassembler ta communauté</p>
-        <p><strong>Connecter</strong> avec d'autres passionnés qui partagent tes centres d'intérêt</p>
-        <p><strong>Gérer</strong> facilement toutes tes participations en un seul endroit</p>
-    </div>
+    <img src="https://veevent.vercel.app/veevent.png" alt="Logo Veevent" class="logo">
+    <h1>Bienvenue ${prenom}</h1>
+    <p>Nous sommes ravis de t’accueillir dans la famille <strong>Veevent</strong></p>
 
     <div class="highlight">
-        <strong>Prêt(e) à commencer ?</strong><br>
-        Connecte-toi dès maintenant et explore ton premier événement !
+        <p>Ton compte a bien été créé.<br>
+            Découvre, crée et partage des événements facilement</p>
     </div>
 
+    <a href="https://veevent.vercel.app" class="cta">Découvrir Veevent</a>
+
     <div class="footer">
-        <div class="signature">
-            L'équipe Veevent 💙
-        </div>
+        <strong>L’équipe Veevent 💙</strong>
+        <p>—<br>
+            Ceci est un email automatique, merci de ne pas y répondre.</p>
     </div>
 </div>
 </body>

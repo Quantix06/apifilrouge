@@ -20,27 +20,6 @@ public class ReportManagerService {
         this.eventRepository = eventRepository;
     }
 
-
-    public Boolean banOrNot(User user) {
-        if (user.getReportsReceived().size()>10 && user.getRole()!=Role.Admin && user.getRole()!=Role.AuthService) {
-            user.setBanned(true);
-            user.setRole(Role.Banned);
-            userRepository.save(user);
-            List<Event> eventList = eventRepository.findByOrganizerId(user.getId())
-                    .orElseThrow();
-
-            // If the user has events, we block them
-            if (!eventList.isEmpty()) {
-                EventStatus eventStatus = EventStatus.BLOCKED;
-                eventList.forEach(event -> event.setStatus(eventStatus));
-            }
-
-            return true;
-        }else {
-            return false;
-        }
-    }
-
     public Boolean hasBeenBanned(User user) {
         if (user.getRole()==Role.Banned) {
             user.setBanned(true);

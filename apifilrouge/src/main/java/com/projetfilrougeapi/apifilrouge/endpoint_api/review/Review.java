@@ -2,6 +2,7 @@ package com.projetfilrougeapi.apifilrouge.endpoint_api.review;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projetfilrougeapi.apifilrouge.endpoint_api.event.Event;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
