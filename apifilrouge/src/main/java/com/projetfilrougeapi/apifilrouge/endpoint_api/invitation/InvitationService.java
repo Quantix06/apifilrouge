@@ -7,7 +7,6 @@ import com.projetfilrougeapi.apifilrouge.email.EmailSender;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.event.Event;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.event.EventController;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.event.EventRepository;
-import com.projetfilrougeapi.apifilrouge.endpoint_api.event.EventService;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.order.OrderController;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.ticket.TicketController;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.User;
@@ -27,13 +26,15 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @Service
 public class InvitationService {
 
+    private final EmailSender emailSender;
     private final InvitationRepository invitationRepository;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
     private final CreateOrderForInvitationService createOrderForInvitationService;
 
-    public InvitationService(InvitationRepository invitationRepository, EventRepository eventRepository, UserRepository userRepository, CreateOrderForInvitationService createOrderForInvitationService) {
+    public InvitationService(InvitationRepository invitationRepository, EventRepository eventRepository, UserRepository userRepository, CreateOrderForInvitationService createOrderForInvitationService, EmailSender emailSender) {
         this.invitationRepository = invitationRepository;
+        this.emailSender = emailSender;
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
         this.createOrderForInvitationService = createOrderForInvitationService;
@@ -160,7 +161,6 @@ public class InvitationService {
 
         Invitation savedInvitation = invitationRepository.save(newInvitation);
 
-        EmailSender emailSender = new EmailSender();
         emailSender.sendInvitationEmail(user, receiver, event);
 
         return EntityModel.of(savedInvitation,

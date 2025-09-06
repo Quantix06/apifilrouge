@@ -5,15 +5,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventEmailUpdateManager {
+    private final EmailSender emailSender;
     private final EventRepository eventRepository;
 
-    public EventEmailUpdateManager( EventRepository eventRepository) {
+    public EventEmailUpdateManager( EventRepository eventRepository, EmailSender emailSender) {
         this.eventRepository = eventRepository;
+        this.emailSender = emailSender;
     }
 
     public void sendMultipleMailToParticipants(Event event) {
         event.getParticipants().forEach(participant -> {
-            EmailSender emailSender = new EmailSender();
             try {
                 emailSender.sendIUpdateEventEmail(participant, event);
             } catch (Exception e) {
