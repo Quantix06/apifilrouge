@@ -6,6 +6,7 @@ import com.projetfilrougeapi.apifilrouge.endpoint_api.city.City;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.invitation.Invitation;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.order.Order;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.place.Place;
+import com.projetfilrougeapi.apifilrouge.endpoint_api.review.Review;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -114,4 +115,10 @@ public class Event {
     @JsonManagedReference(value = "event-orders")
     @JsonIgnore
     private List<Order> orders;
+
+    @OneToMany
+    @JoinColumn(name = "review_event_id")
+    @JsonManagedReference(value = "event-reviews")
+    @JsonIgnore
+    private List<Review> reviews;
 }

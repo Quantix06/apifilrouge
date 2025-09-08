@@ -41,6 +41,12 @@ public class Review {
     @JsonIgnore
     private User reviewedUser;
 
+    @ManyToOne
+    @JoinColumn(name = "review_event_id", nullable = true)
+    @JsonBackReference("event-reviews")
+    @JsonIgnore
+    private Event event;
+
 
     public Review(String content, Double rating, User senderReviewUser, User reviewedUser) {
         this.content = content;

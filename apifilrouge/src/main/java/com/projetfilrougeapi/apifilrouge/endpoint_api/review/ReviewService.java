@@ -1,5 +1,6 @@
 package com.projetfilrougeapi.apifilrouge.endpoint_api.review;
 
+import com.projetfilrougeapi.apifilrouge.DTO.EventSummaryResponse;
 import com.projetfilrougeapi.apifilrouge.DTO.ReviewRequest;
 import com.projetfilrougeapi.apifilrouge.DTO.UserSummary;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.User;
@@ -34,7 +35,9 @@ public class ReviewService {
 
         //   Review review = New Review()
         Review review = new Review(requestReview.getContent(), requestReview.getRating(), sender, reportedUser);
-
+        if (review.getEvent().getParticipants().contains(review.getReviewedUser())) {
+            throw new RuntimeException("The user is not linked to the specified event : " + review.getEvent()+ "event " + reportedUser.getId() );
+        }
 
         Review savedReview = reviewRepository.save(review);
         reviewManagerService.manageReviewNote(savedReview);
@@ -98,5 +101,21 @@ public class ReviewService {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
         reviewRepository.delete(review);
+    }
+
+    public EntityModel<EventSummaryResponse> getReviewedEvent(Long id) {
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
+
+        if (review.getEvent() == null) {
+            throw new RuntimeException("No event associated with this review id: " + id);
+        }
+
+
+        EventSummaryResponse eventSummary = EventSummaryResponse.fromEntity(review.getEvent());
+
+        return EntityModel.of(eventSummary,
+                linkTo(methodOn(ReviewController.class).getReviewedEvent(review.getReview_id())).withSelfRel(),
+                linkTo(methodOn(EventSummaryResponse.class).getId()).withRel("event"));
     }
 }

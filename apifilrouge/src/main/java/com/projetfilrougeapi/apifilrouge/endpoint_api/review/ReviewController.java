@@ -1,5 +1,6 @@
 package com.projetfilrougeapi.apifilrouge.endpoint_api.review;
 
+import com.projetfilrougeapi.apifilrouge.DTO.EventSummaryResponse;
 import com.projetfilrougeapi.apifilrouge.DTO.ReviewRequest;
 import com.projetfilrougeapi.apifilrouge.DTO.UserSummary;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.User;
@@ -30,9 +31,15 @@ public class ReviewController {
     public EntityModel<Review> getReviewById(@PathVariable Long id) {
         return reviewService.getReviewById(id);
     }
+
     @GetMapping("/{id}/senderUser")
     public EntityModel<UserSummary> getSenderUserByReviewId(@PathVariable Long id) {
         return reviewService.getSenderUserByReviewId(id);
+    }
+
+    @GetMapping("/{id}/reviewedEvent")
+    public EntityModel<EventSummaryResponse> getReviewedEvent(@PathVariable Long id) {
+        return reviewService.getReviewedEvent(id);
     }
 
     @GetMapping("/{id}/reviewedUser")

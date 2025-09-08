@@ -13,6 +13,7 @@ import com.projetfilrougeapi.apifilrouge.endpoint_api.invitation.InvitationContr
 import com.projetfilrougeapi.apifilrouge.endpoint_api.place.Place;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.place.PlaceController;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.place.PlaceRepository;
+import com.projetfilrougeapi.apifilrouge.endpoint_api.review.Review;
 import com.projetfilrougeapi.apifilrouge.endpoint_api.user.*;
 import com.projetfilrougeapi.apifilrouge.helper.SecurityHelper;
 import com.projetfilrougeapi.apifilrouge.validator.DateValidator;
@@ -590,5 +591,26 @@ public class EventService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         eventRepository.delete(event);
+    }
+
+    public CollectionModel<EntityModel<EventSummaryResponse>> getReviews(Long eventId) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+
+        List<Review> reviews = event.getReviews();
+        if (reviews.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No reviews found for this event");
+        }
+
+        List<EntityModel<EventSummaryResponse>> reviewModels = reviews.stream()
+                .map(review -> {
+                    EventSummaryResponse reviewDto = EventSummaryResponse.fromEntity(review.getEvent());
+                    return eventSummaryResponseAssembler.toModel(reviewDto);
+                })
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(reviewModels,
+                linkTo(methodOn(EventController.class).getreviews(eventId)).withSelfRel(),
+                linkTo(methodOn(EventController.class).getEventById(eventId)).withRel("event"));
     }
 }

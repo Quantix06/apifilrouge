@@ -103,6 +103,18 @@ public class EventController {
     ) {
         return eventService.getFirstEditionEvents(city,place, limit, onlyAvailable);
     }
+    /**
+     * GET endpoint to retrieve a limited list of trending events.
+     * <p>
+     * Send back a collection of event summary DTOs with HATEOAS navigation links.
+     * </p>
+     * @param eventId The ID of the event to retrieve reviews for.
+     * @return A CollectionModel containing EntityModels of EventSummaryResponse.
+     */
+    @GetMapping("/{eventId}/reviews")
+    public CollectionModel<EntityModel<EventSummaryResponse>> getreviews(@PathVariable Long eventId) {
+        return eventService.getReviews(eventId);
+    }
 
     /**
      * GET endpoint to retrieve a limited list of trending events.
